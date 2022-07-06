@@ -8,7 +8,7 @@ const db = mysql.createConnection(
       user: 'root',
       // Your MySQL password
       password: 'bootcamp123',
-      database: 'election'
+      database: 'employee_info'
     },
     console.log('Connected to the election database.')
   );
