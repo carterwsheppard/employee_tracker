@@ -1,0 +1,26 @@
+{
+  "name": "employee_tracker",
+  "version": "1.0.0",
+  "description": "User Story:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carterwsheppard/employee_tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carterwsheppard/employee_tracker/issues"
+  },
+  "homepage": "https://github.com/carterwsheppard/employee_tracker#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "express": "^4.18.1",
+    "inquirer": "^9.0.0",
+    "mysql2": "^2.3.3"
+  }
+}
