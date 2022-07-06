@@ -26,7 +26,6 @@ db.connect(err => {
   console.log('Database connected.');
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    index;
   });
 });
-
-//index.startApp();
