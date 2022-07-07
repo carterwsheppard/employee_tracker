@@ -70,15 +70,15 @@ const startApp = (questionData) => {
 
 // show all departments
 viewAllDepartments = () => {
-    fetch('http://localhost:3001/api/departments', {
+    fetch('http://localhost:3001/api/departments',{
         method: 'GET',
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
-        }
-      }).then(answer => {console.log(answer)})
-
-      startApp();
-
+        }}
+      ).then(answer => console.log(answer)).then( () =>{
+        startApp();
+      })
     };
 
 //show all roles
