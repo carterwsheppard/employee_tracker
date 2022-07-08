@@ -2,6 +2,7 @@
 
 const inquirer = require('inquirer');
 const fetch = require('node-fetch');
+const cTable = require('console.table');
 
 
 
@@ -25,8 +26,8 @@ const startApp = (questionData) => {
                 "View all Employees",
                 "Add a Department",
                 "Add a Role",
-                "Add an Employee",
-                "Update an Employee Role"
+                "Add an Employee"//,
+                //"Update an Employee Role"
             ]
         }
     ]).then(answer => {
@@ -58,9 +59,9 @@ const startApp = (questionData) => {
                     .then(employee => addEmployee(employee));
                 return;
 
-            case "Update an Employee Role":
-                updateEmployee();
-                return;
+            //case "Update an Employee Role":
+               //updateEmployee();
+               // return;
 
         }
     })
@@ -72,13 +73,12 @@ const startApp = (questionData) => {
 viewAllDepartments = () => {
     fetch('http://localhost:3001/api/departments',{
         method: 'GET',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
-        }}
-      ).then(answer => console.log(answer)).then( () =>{
-        startApp();
-      })
+        }})
+      .then(res => res.json())
+      .then(answer => {console.table(answer.data)})
+      .then( () => {startApp();})
     };
 
 //show all roles
@@ -88,9 +88,10 @@ viewAllRoles = () => {
             headers: {
               'Content-Type': 'application/json',
             }
-          });
-    
-        startApp();
+          })
+          .then(res => res.json())
+          .then(answer => {console.table(answer.data)})
+          .then( () => {startApp();})
     };
     
 // show all employees
@@ -100,9 +101,11 @@ viewAllEmployees = () => {
             headers: {
               'Content-Type': 'application/json',
             }
-          });
-    
-        startApp();};
+          })
+          .then(res => res.json())
+          .then(answer => {console.table(answer.data)})
+          .then( () => {startApp();})
+    };
     
     
 addDepartmentPrompt = () => {
@@ -122,8 +125,11 @@ addDepartmentPrompt = () => {
                       'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(department)
-                  });
-                  startApp();
+                  })
+                  .then(res => res.json())
+                .then(answer => {console.table(answer.data)})
+                .then( () => {startApp();})
+                  
     },
 
     
@@ -141,8 +147,8 @@ addDepartmentPrompt = () => {
             },
             {
                 type: "input",
-                name: "department",
-                message: "What is the name of the department of this role?"
+                name: "department_id",
+                message: "What is the name of the department ID of this role?"
             }
         ])
     }
@@ -154,8 +160,10 @@ addDepartmentPrompt = () => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(role)
-          });
-                startApp();
+          })
+          .then(res => res.json())
+      .then(answer => {console.table(answer.data)})
+      .then( () => {startApp();})
             }
     
     addEmployeePrompt = () => {
@@ -190,17 +198,22 @@ addDepartmentPrompt = () => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(employee)
-          });
-          startApp();}
+          })
+          .then(res => res.json())
+      .then(answer => {console.table(answer.data)})
+      .then( () => {startApp();})
+          }
         
     
-    updateEmployee = (id, role_id) => {
-       fetch(`http://localhost:3001/api/employee/${id}`,{
-           method: 'PUT',
-           headers: { 'Content-Type':'application/json' },
-           body: JSON.stringify(role_id)
-       })
-       startApp();
-    }
+   // updateEmployee = (id, role_id) => {
+    //   fetch(`http://localhost:3001/api/employee/${id}`,{
+   //        method: 'PUT',
+   //        headers: { 'Content-Type':'application/json' },
+    //       body: JSON.stringify(role_id)
+    //   })
+   //    .then(res => res.json())
+  //     .then(answer => {console.table(answer.data)})
+ //      .then( () => {startApp();})
+ //   }
 
     module.exports = startApp();
